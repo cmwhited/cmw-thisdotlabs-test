@@ -17,6 +17,7 @@
       "@app/*": ["src/app/*"],
       "@env/*": ["src/environments/*"],
       "@ui/*": ["src/ui-theme/*"],
+      "@common/*": ["src/app-common/*"],
       "@github-user-search/*": ["src/github-user-search/*"]
     }
   }

@@ -1,0 +1,29 @@
+<section class="search-results" *ngIf="response">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <h2>GitHub Search Results</h2>
+      <span class="fill-space"></span>
+      <app-github-search-results-paginator
+        *ngIf="responsePageInfo.hasPreviousPage || responsePageInfo.hasNextPage"
+        [pageInfo]="responsePageInfo"
+        (nextPageEventEmitter)="onGetNextPage($event)"
+        (prevPageEventEmitter)="onGetPrevPage($event)"
+      ></app-github-search-results-paginator>
+      <span class="fill-space"></span>
+      <span>
+        <mat-chip-list>
+          <mat-chip color="primary" selected>{{ response.userCount.toString() + ' Users Matching Search' }}</mat-chip>
+        </mat-chip-list>
+      </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div *ngIf="responseUserNodes && responseUserNodes.length > 0">
+    <app-github-search-result-user-node *ngFor="let user of responseUserNodes" [userNode]="user"></app-github-search-result-user-node>
+  </div>
+  <app-github-search-results-paginator
+    *ngIf="responsePageInfo.hasPreviousPage || responsePageInfo.hasNextPage"
+    [pageInfo]="responsePageInfo"
+    (nextPageEventEmitter)="onGetNextPage($event)"
+    (prevPageEventEmitter)="onGetPrevPage($event)"
+  ></app-github-search-results-paginator>
+</section>

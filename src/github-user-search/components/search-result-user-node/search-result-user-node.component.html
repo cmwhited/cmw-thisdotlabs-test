@@ -1,0 +1,40 @@
+<section class="search-result-user-node" *ngIf="userNode">
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-avatar [src]="userNode.avatarUrl" *ngIf="userNode.avatarUrl" />
+      <mat-card-title>{{ userNode.login }}</mat-card-title>
+      <mat-card-subtitle *ngIf="userNode.bio">{{ userNode.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <section class="mat-caption" *ngIf="userNode.bio">{{ userNode.bio }}</section>
+      <mat-list>
+        <mat-list-item *ngIf="userNode.email">
+          <mat-icon matListIcon>email</mat-icon>
+          <p matLine>{{ userNode.email }}</p>
+        </mat-list-item>
+        <mat-list-item *ngIf="userNode.location">
+          <mat-icon matListIcon>pin_drop</mat-icon>
+          <p matLine>{{ userNode.location }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListIcon>star</mat-icon>
+          <p matLine>{{ 'Starred Repositories ' + userNode.starredRepositories.totalCount }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListIcon>people</mat-icon>
+          <p matLine>{{ 'Followers ' + userNode.followers.totalCount }}</p>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListIcon>favorite</mat-icon>
+          <p matLine>{{ 'Following ' + userNode.following.totalCount }}</p>
+        </mat-list-item>
+      </mat-list>
+      <mat-nav-list>
+        <mat-list-item>
+          <fa-icon matListIcon [icon]="faGitHub"></fa-icon>
+          <a matLine [href]="userNode.url" target="_blank">View GitHub Profile</a>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-card-content>
+  </mat-card>
+</section>

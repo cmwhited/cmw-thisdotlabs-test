@@ -24,9 +24,13 @@ import {
   MatRadioModule,
   MatTooltipModule,
   MatButtonToggleModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatChipsModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @NgModule({
   imports: [
@@ -55,7 +59,9 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatRadioModule,
     MatTooltipModule,
     MatButtonToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
+    FontAwesomeModule
   ],
   exports: [
     MatButtonModule,
@@ -83,7 +89,13 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatRadioModule,
     MatTooltipModule,
     MatButtonToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
+    FontAwesomeModule
   ]
 })
-export class UIThemeModule {}
+export class UIThemeModule {
+  constructor() {
+    library.add(faGithub);
+  }
+}

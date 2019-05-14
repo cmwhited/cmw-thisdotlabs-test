@@ -1,0 +1,8 @@
+$error-color: #b71c1c;
+
+.error-container {
+  border: 1px solid $error-color;
+  border-radius: 10px;
+  background-color: rgba($color: $error-color, $alpha: 0.85);
+  padding: 25px 15px;
+}
