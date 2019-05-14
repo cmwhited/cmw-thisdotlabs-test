@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  githubGraphQlApiToken: '9f5b33239d7039a26fee506e2375c6a62b270cd9',
+  githubGraphQlApiToken: 'INSERT_VALID_TOKEN',
   githubGraphQlUri: 'https://api.github.com/graphql'
 };
 
