@@ -1,0 +1,23 @@
+<form novalidate [formGroup]="searchFormGroup" (submit)="onSubmit(searchFormGroup.value)" class="search-entry-form">
+  <mat-form-field appearance="outline" color="primary" class="full-width-input">
+    <mat-label>GitHub User Search Input</mat-label>
+    <input matInput [formControl]="searchFormGroup.get('searchInput')" required />
+    <button
+      mat-button
+      *ngIf="searchFormGroup.get('searchInput').value"
+      matSuffix
+      mat-icon-button
+      aria-label="Clear"
+      (click)="clearSearchInput()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error *ngIf="searchFormGroup.get('searchInput').invalid && searchFormGroup.get('searchInput').touched">
+      GitHub User Search Input is required
+    </mat-error>
+    <mat-hint>Enter in the user information (username, email, name, etc) to Search for users</mat-hint>
+  </mat-form-field>
+  <button type="submit" color="primary" mat-raised-button [disabled]="searchFormGroup.invalid" class="search-button">
+    Search
+  </button>
+</form>

@@ -1,1 +1,61 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$cmw-thisdotlabs-test-primary: mat-palette($mat-teal, 800, 900, 600);
+$cmw-thisdotlabs-test-accent: mat-palette($mat-grey, 800, 900, 600);
+$cmw-thisdotlabs-test-warn: mat-palette($mat-red, 900, 900, 600);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$cmw-thisdotlabs-test-theme: mat-light-theme($cmw-thisdotlabs-test-primary, $cmw-thisdotlabs-test-accent, $cmw-thisdotlabs-test-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($cmw-thisdotlabs-test-theme);
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$cmw-thisdotlabs-test-typography: mat-typography-config(
+  $font-family: 'Roboto',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($cmw-thisdotlabs-test-typography);
+
+// Override the typography in the core CSS.
+@include mat-core($cmw-thisdotlabs-test-typography);
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+.fill-space {
+  flex: 1 1 auto;
+}
+.text-caption {
+  font-size: 14px;
+  font-weight: lighter;
+}
+.full-width-input {
+  width: 100%;
+}

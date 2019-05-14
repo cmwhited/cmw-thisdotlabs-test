@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Search for GitHub Users</mat-card-title>
+    <mat-card-subtitle>Enter the search in the Input below and hit search</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <app-search-form (searchSubmittedEvent)="submitGitHubUserSearch($event)"></app-search-form>
+    <div>{{ data$ | async | json }}</div>
+  </mat-card-content>
+</mat-card>
