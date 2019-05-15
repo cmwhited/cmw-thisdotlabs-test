@@ -8,6 +8,7 @@ export interface EnvModel {
     logoutUrl: string;
     successUrl: string;
     responseType: string;
+    mgmtToken: string;
   };
   githubGraphQLUrl: string;
 }

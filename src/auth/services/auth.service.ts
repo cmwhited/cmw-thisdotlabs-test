@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of, bindNodeCallback } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import * as auth0 from 'auth0-js';
@@ -11,8 +12,8 @@ export class AuthService {
     clientID: environment.auth0.clientId,
     domain: environment.auth0.domain,
     responseType: environment.auth0.responseType,
-    redirectUri: environment.auth0.callbackUrl,
-    __tryLocalStorageFirst: true
+    scope: 'profile read:users read:user_idp_tokens',
+    redirectUri: environment.auth0.callbackUrl
   });
   // Create observable of Auth0 parseHash method to gather auth results
   readonly parseHash$ = bindNodeCallback(this.auth0Client.parseHash.bind(this.auth0Client));
@@ -41,7 +42,7 @@ export class AuthService {
     return this.accessToken && Date.now() < this.expiresAt;
   }
 
-  get logourUrl(): string {
+  get logoutUrl(): string {
     return environment.auth0.logoutUrl;
   }
 
@@ -49,17 +50,32 @@ export class AuthService {
     return environment.auth0.successUrl;
   }
 
-  constructor(private readonly apollo: Apollo) {}
+  constructor(private readonly apollo: Apollo, private readonly http: HttpClient) {}
+
+  /**
+   * Get the full user details which contains the github access token needed for the GitHub api
+   * @param userId the user id to retrieve details for
+   */
+  getFullUserDetails(userId: string): Observable<any> {
+    return this.http.get<any>(
+      `https://${environment.auth0.domain}/api/v2/users/${encodeURIComponent(userId)}?fields=identities&include_fields=true`,
+      {
+        headers: { authorization: `Bearer ${environment.auth0.mgmtToken}`, 'content-type': 'application/json' }
+      }
+    );
+  }
 
   /**
    * check the local storage for the authentication items. if present, and not expired, user is authenticated
    */
   checkForAuth() {
-    if (localStorage.getItem('ACCESS_TOKEN') && localStorage.getItem('ID_TOKEN') && localStorage.getItem('EXPIRY')) {
+    if (localStorage.getItem('ACCESS_TOKEN')) {
       const accessToken: string = localStorage.getItem('ACCESS_TOKEN');
       const idToken: string = localStorage.getItem('ID_TOKEN');
+      const userId: string = localStorage.getItem('USER_ID');
+      const githubIdpAccessToken: string = localStorage.getItem('GITHUB_ACCESS_TOKEN');
       const expiry: number = parseInt(localStorage.getItem('EXPIRY'), 10);
-      this.setAuth(accessToken, idToken, expiry);
+      this.setAuth(accessToken, idToken, userId, githubIdpAccessToken, expiry);
     }
   }
 
@@ -87,12 +103,16 @@ export class AuthService {
    * Set the token & expiry values
    * @param accessToken the authenticated access token from auth0
    * @param idToken the authenticeted id token from auth0
+   * @param userId the authenticated user id
+   * @param githubIdpAccessToken the GitHub API Identity provider access token
    * @param expiry the timestamp of when the token expires
    */
-  setAuth(accessToken: string, idToken: string, expiry: number) {
+  setAuth(accessToken: string, idToken: string, userId: string, githubIdpAccessToken, expiry: number) {
     // set tokens into localSorage.
     localStorage.setItem('ACCESS_TOKEN', accessToken);
     localStorage.setItem('ID_TOKEN', idToken);
+    localStorage.setItem('USER_ID', userId);
+    localStorage.setItem('GITHUB_ACCESS_TOKEN', githubIdpAccessToken);
     localStorage.setItem('EXPIRY', expiry.toString());
   }
 
@@ -101,8 +121,6 @@ export class AuthService {
    */
   removeAuth(): void {
     // remove from local storage
-    localStorage.removeItem('ACCESS_TOKEN');
-    localStorage.removeItem('ID_TOKEN');
-    localStorage.removeItem('EXPIRY');
+    localStorage.clear();
   }
 }

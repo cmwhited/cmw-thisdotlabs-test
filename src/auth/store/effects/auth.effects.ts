@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { of, empty } from 'rxjs';
+import { of } from 'rxjs';
 import { tap, exhaustMap, map, catchError } from 'rxjs/operators';
 
 import { AuthService } from '@auth/services';
@@ -22,12 +22,20 @@ export class AuthEffects {
     ofType<fromAuthActions.SigninComplete>(fromAuthActions.AuthActionTypes.SigninComplete),
     exhaustMap(() => {
       return this.authService.parseHash$().pipe(
-        map((result: any) => {
-          if (result && result.accessToken && result.idToken) {
-            const expiry: number = result.expiresIn * 1000 + Date.now();
-            this.authService.setAuth(result.accessToken, result.idToken, expiry);
-            return new fromAuthActions.SigninSuccess();
-          }
+        map(({ accessToken, idToken, expiresIn, idTokenPayload }: any) => {
+          const expiry: number = expiresIn * 1000 + Date.now();
+          return { accessToken, idToken, expiry, payload: idTokenPayload };
+        }),
+        exhaustMap(({ accessToken, idToken, expiry, payload }) => {
+          return this.authService.getFullUserDetails(payload.sub).pipe(
+            map((response: any) => {
+              const githubAccessToken: string =
+                response && response.identities && response.identities.length > 0 ? response.identities[0].access_token : null;
+              this.authService.setAuth(accessToken, idToken, payload.sub, githubAccessToken, expiry);
+              return new fromAuthActions.SigninSuccess();
+            }),
+            catchError(error => of(new fromAuthActions.SigninFailure(error)))
+          );
         }),
         catchError(error => {
           this.authService.removeAuth();
@@ -48,24 +56,11 @@ export class AuthEffects {
   @Effect()
   checkAuth$ = this.actions$.pipe(
     ofType<fromAuthActions.CheckAuth>(fromAuthActions.AuthActionTypes.CheckAuth),
-    exhaustMap(() => {
+    map(() => {
       if (this.authService.isAuthenticated) {
-        return this.authService.checkSession$({}).pipe(
-          map((result: any) => {
-            if (result && result.accessToken && result.idToken) {
-              const expiry: number = result.expiresIn * 1000 + Date.now();
-              this.authService.setAuth(result.accessToken, result.idToken, expiry);
-              window.location.hash = ''; // reset current location
-              return new fromAuthActions.SigninSuccess();
-            }
-          }),
-          catchError(error => {
-            this.authService.removeAuth();
-            return of(new fromAuthActions.SigninFailure(error));
-          })
-        );
+        return new fromAuthActions.SigninSuccess();
       } else {
-        return empty();
+        return new fromAuthActions.SigninFailure(`no authenticated user found`);
       }
     })
   );

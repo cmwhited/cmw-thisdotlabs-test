@@ -9,7 +9,6 @@ import { AppCommonModule } from '@common/app-common.module';
 
 import { effects, reducers } from '@auth/store';
 import * as fromContainers from '@auth/containers';
-import * as fromComponents from '@auth/components';
 import * as fromServices from '@auth/services';
 import * as fromGuards from '@auth/guards';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -24,8 +23,8 @@ import { AuthRoutingModule } from './auth-routing.module';
     AppCommonModule,
     AuthRoutingModule
   ],
-  declarations: [...fromContainers.containers, ...fromComponents.components],
+  declarations: [...fromContainers.containers],
   providers: [...fromServices.services, ...fromGuards.guards],
-  exports: [...fromContainers.containers, ...fromComponents.components]
+  exports: [...fromContainers.containers]
 })
 export class AuthModule {}

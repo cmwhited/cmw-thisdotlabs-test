@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -40,14 +40,13 @@ import { AppComponent } from '@app/app.component';
 })
 export class AppModule {
   // instantiate apollo graphql client
-  constructor(private readonly apollo: Apollo, private readonly httpLink: HttpLink) {
-    const link: HttpLinkHandler = httpLink.create({ uri: environment.githubGraphQLUrl });
+  constructor(private readonly apollo: Apollo, private readonly httpLink: HttpLink, private readonly http: HttpClient) {
+    const link: HttpLinkHandler = this.httpLink.create({ uri: environment.githubGraphQLUrl });
     const auth = setContext((_: any, { headers }) => {
-      console.log(`apollo client with token ${localStorage.getItem('ACCESS_TOKEN')}`);
       return {
         headers: {
           ...headers,
-          Authorization: `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`
+          Authorization: `Bearer ${localStorage.getItem('GITHUB_ACCESS_TOKEN')}`
         }
       };
     });

@@ -6,15 +6,17 @@ import * as fromAuthStore from '@auth/store';
 @Component({
   selector: 'app-signin-container',
   template: `
-    <app-signin-form (singinSubmittedEvent)="beginSignin()"></app-signin-form>
+    <div>
+      <app-loading-indicator title="Beginning Authentication..."></app-loading-indicator>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SigninContainerComponent {
+export class SigninContainerComponent implements OnInit {
   constructor(private readonly authStore: Store<fromAuthStore.AuthState>) {}
 
-  // begin the auth0 signin flow
-  beginSignin() {
+  // begin the auth0 authentication flow
+  ngOnInit() {
     this.authStore.dispatch(new fromAuthStore.Signin());
   }
 }
