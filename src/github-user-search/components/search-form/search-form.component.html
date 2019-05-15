@@ -2,16 +2,6 @@
   <mat-form-field appearance="outline" color="primary" class="full-width-input">
     <mat-label>GitHub User Search Input</mat-label>
     <input matInput [formControl]="searchFormGroup.get('searchInput')" required />
-    <button
-      mat-button
-      *ngIf="searchFormGroup.get('searchInput').value"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="clearSearchInput()"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
     <mat-error *ngIf="searchFormGroup.get('searchInput').invalid && searchFormGroup.get('searchInput').touched">
       GitHub User Search Input is required
     </mat-error>

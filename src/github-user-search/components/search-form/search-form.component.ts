@@ -28,11 +28,6 @@ export class SearchFormComponent implements OnInit {
     this.searchFormGroup = this.searchFormBuilder.build();
   }
 
-  clearSearchInput() {
-    this.searchFormGroup.get('searchInput').patchValue(null);
-    this.searchFormGroup.get('searchInput').updateValueAndValidity();
-  }
-
   /**
    * The submitted Form value for the GitHub user search.
    * Emit this as an event for the parent container to process
