@@ -1,0 +1,14 @@
+<mat-card *ngIf="signinForm">
+  <mat-card-content>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <h1>CMW ThisDotLabs Test Signin</h1>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <form [formGroup]="signinForm" (submit)="onSubmit()">
+      <button mat-raised-button color="primary" type="submit">
+        Begin Signin Flow
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -2,10 +2,20 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+import { EnvModel } from './env.model';
+
+export const environment: EnvModel = {
   production: false,
-  githubGraphQlApiToken: 'INSERT_VALID_TOKEN',
-  githubGraphQlUri: 'https://api.github.com/graphql'
+  auth0: {
+    clientId: 'MawBglFBIIVMqMWWZaRc9EZ053p2RVEn',
+    domain: 'chriswhited.auth0.com',
+    callbackUrl: 'http://localhost:4200/auth/callback',
+    externalLogoutUrl: 'http://localhost:4200/auth/signin',
+    logoutUrl: 'auth/signin',
+    successUrl: 'github-user-search',
+    responseType: 'token id_token'
+  },
+  githubGraphQLUrl: 'https://api.github.com/graphql'
 };
 
 /*

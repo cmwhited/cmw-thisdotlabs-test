@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "cmw-thisdotlabs-test"
+  "defaultProject": "cmw-thisdotlabs-test",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

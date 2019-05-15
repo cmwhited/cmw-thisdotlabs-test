@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { StoreRouterConnectingModule, NavigationActionTiming } from '@ngrx/router-store';
+
+import { CustomSerializer } from '@app/store/reducers/custom-route.serializer';
 
 const routes: Routes = [
   {
@@ -14,7 +17,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    StoreRouterConnectingModule.forRoot({
+      serializer: CustomSerializer,
+      navigationActionTiming: NavigationActionTiming.PostActivation
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

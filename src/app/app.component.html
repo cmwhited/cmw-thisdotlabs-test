@@ -2,6 +2,17 @@
   <mat-toolbar color="primary" class="main-toolbar">
     <mat-toolbar-row>
       <h1>GitHub Users Search</h1>
+      <span class="fill-space"></span>
+      <span *ngIf="authenticated$ | async" class="auth-user-container">
+        <mat-chip-list class="authenticated-chip">
+          <mat-chip color="accent" selected>You are authenticated</mat-chip>
+        </mat-chip-list>
+        <span>
+          <button mat-raised-button (click)="signout()">
+            Signout
+          </button>
+        </span>
+      </span>
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="main-content">

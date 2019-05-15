@@ -25,3 +25,14 @@
     }
   }
 }
+
+.auth-user-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+
+  .authenticated-chip {
+    margin-right: 15px;
+  }
+}
