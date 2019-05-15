@@ -6,7 +6,7 @@ export const environment: EnvModel = {
     clientId: 'MawBglFBIIVMqMWWZaRc9EZ053p2RVEn',
     domain: 'chriswhited.auth0.com',
     callbackUrl: 'https://cmw-thisdotlabs-test.chriswhited.io/auth/callback',
-    externalLogoutUrl: 'https://cmw-thisdotlabs-test.c/auth/signin',
+    externalLogoutUrl: 'https://cmw-thisdotlabs-test.chriswhited.io/auth/signin',
     logoutUrl: '/auth/signin',
     successUrl: '/github-user-search',
     responseType: 'token id_token',
