@@ -15,15 +15,13 @@ export const environment: EnvModel = {
     successUrl: 'github-user-search',
     responseType: 'token id_token',
     mgmtToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlF6RTJPRFpGUkRoR1FUa3pNa00yTWpFek5qWkdOVVZCT1RRMU5UTXh' +
-      'Oa1pCTWpReE5qVTRSUSJ9.eyJpc3MiOiJodHRwczovL2Nocmlzd2hpdGVkLmF1dGgwLmNvbS8iLCJzdWIiOiJyaVdQMVROR1BK' +
-      'MVRldzFqdXNPcVhSbkpkUkdycUpES0BjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9jaHJpc3doaXRlZC5hdXRoMC5jb20vYXBpL3Y' +
-      'yLyIsImlhdCI6MTU1Nzg5MDMwNCwiZXhwIjoxNTU3OTc2NzA0LCJhenAiOiJyaVdQMVROR1BKMVRldzFqdXNPcVhSbkpkUkdycU' +
-      'pESyIsInNjb3BlIjoicmVhZDp1c2VycyByZWFkOnVzZXJfaWRwX3Rva2VucyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9' +
-      '.SI600O1-_d86-P3w7s9g4MggD7T1cAc-YD8XGLt7LTQoduR4BqHfQQN0cLxqmLDCKVyKwQvX2wcc9NMQPzi6NAHtejxnAYNNfR' +
-      'dWiFNRNoZjlbiZ_hK64SdXN5z7WAtrHRx4UwMby7G2dQMh3p7a7TVUrCDT31xgcLuJj7v6LtniHsSkWBOUb6avBN5gJLRNufGlFt' +
-      'A_MySviYtceaT71cpoZbHkcS5kMMmaVQrd2b1h0TPRN4EJ0X0UH_OfCQXPmsrQN0ue2s00y11zf6bwVQD6TaImgLuoaEvugbk8uM' +
-      'RF_vYUKpB8Akn8SnOMweDzKWWGJVlLr_eYNcuIZbjBzg'
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlF6RTJPRFpGUkRoR1FUa3pNa00yTWpFek5qWkdOVVZCT1RRMU5UTXhOa1pCTWpReE5qVTRSUSJ9.' +
+      'eyJpc3MiOiJodHRwczovL2Nocmlzd2hpdGVkLmF1dGgwLmNvbS8iLCJzdWIiOiJyaVdQMVROR1BKMVRldzFqdXNPcVhSbkpkUkdycUpES0BjbGllbnRzIiwiY' +
+      'XVkIjoiaHR0cHM6Ly9jaHJpc3doaXRlZC5hdXRoMC5jb20vYXBpL3YyLyIsImlhdCI6MTU1ODYyNzgxOSwiZXhwIjoxNTU4NzE0MjE5LCJhenAiOiJyaVdQMVR' +
+      'OR1BKMVRldzFqdXNPcVhSbkpkUkdycUpESyIsInNjb3BlIjoicmVhZDp1c2VycyByZWFkOnVzZXJfaWRwX3Rva2VucyIsImd0eSI6ImNsaWVudC1jcmVkZW50aW' +
+      'FscyJ9.AzcvUZGgcnrYBvbXJH6JVLWD7rjASR1Sm_icPinS6DuLPQyDAu2WJZyrhzBPLV79cuq-2BgjGcW4sC9zTSUV8TGrC0l4D08vebrUDAcFv8Y0X' +
+      '-Hdk8ADQt_Enau8uPmSWD78fVIex0BH3Pxj-mbrcKBxUjeWqO2FgOUGOzJhlxR4cLZtJe3GgZri8FTR1KsUmpB-HSjNEliKbzUgMKt0u3p5B7tLPrRJHxI642pj8' +
+      '83kWDqNE8oEwKqwfOYetgx9xtZQ_RmgnDEHHnxDlb2GGY6ixA5ng5s_mNBi1xehqrtZVWNX7eDI-yze7_dT78_odVXpk0y0xlu0ChZBP6ZHcA'
   },
   githubGraphQLUrl: 'https://api.github.com/graphql'
 };
