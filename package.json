@@ -35,7 +35,7 @@
     "apollo-client": "^2.4.0",
     "apollo-link": "^1.2.0",
     "apollo-link-context": "^1.0.17",
-    "auth0-js": "^9.10.2",
+    "auth0-js": "^9.13.2",
     "core-js": "^2.5.4",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.10.0",
